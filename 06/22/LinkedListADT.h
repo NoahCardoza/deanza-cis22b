@@ -1,7 +1,7 @@
 // Specification file for the LinkedList class
 // Written By: A. Student
-// Changed By:
-// IDE: Xcode
+// Changed By: Noah Cardoza
+// IDE: VS Code
 
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
@@ -16,14 +16,14 @@ private:
     int length;
 
 public:
-    LinkedList();   // constructor
-    ~LinkedList();  // destructor
+    LinkedList();  // constructor
+    ~LinkedList(); // destructor
 
     // Linked list operations
-    int getLength() const {return length;}
+    int getLength() const { return length; }
     void insertNode(const T &);
     bool deleteNode(const T &);
-    
+
     void displayListForw() const;
     void displayListBack() const;
     bool searchList(const T &, T &) const;
@@ -53,10 +53,10 @@ LinkedList<T>::LinkedList()
 template <class T>
 void LinkedList<T>::insertNode(const T &dataIn)
 {
-    ListNode<T> *newNode;  // A new node
-    ListNode<T> *pCur;     // To traverse the list
-    ListNode<T> *pPre;     // The previous node
-    
+    ListNode<T> *newNode; // A new node
+    ListNode<T> *pCur;    // To traverse the list
+    ListNode<T> *pPre;    // The previous node
+
     // Allocate a new node and store num there.
     newNode = new ListNode<T>(dataIn);
 
@@ -64,20 +64,19 @@ void LinkedList<T>::insertNode(const T &dataIn)
     pCur = head->getNext();
 
     // Find location: skip all nodes whose code is less than dataIn's code
-   // while (pCur != head && newNode->getData().getCode() > pCur->getData().getCode())
+    // while (pCur != head && newNode->getData().getCode() > pCur->getData().getCode())
     while (pCur != head && newNode->getData() > pCur->getData())
     {
         pCur = pCur->getNext();
     }
-    
+
     // Insert the new node between pPre and pCur
     pPre = pCur->getPrev();
     pPre->setNext(newNode);
     newNode->setNext(pCur);
     newNode->setPrev(pPre);
     pCur->setPrev(newNode);
-    
-    
+
     // Update the counter
     length++;
 }
@@ -91,11 +90,10 @@ void LinkedList<T>::insertNode(const T &dataIn)
 template <class T>
 bool LinkedList<T>::deleteNode(const T &target)
 {
-  /* Write your code here */
-  
+    /* Write your code here */
+
     return deleted;
 }
-
 
 //**************************************************
 // displayList shows the value
@@ -105,21 +103,21 @@ bool LinkedList<T>::deleteNode(const T &target)
 template <class T>
 void LinkedList<T>::displayListForw() const
 {
-     ListNode<T> *pCur;  // To move through the list
+    ListNode<T> *pCur; // To move through the list
 
-     // Position pCur: skip the head of the list.
-     pCur = head->getNext();
+    // Position pCur: skip the head of the list.
+    pCur = head->getNext();
 
-     // While pCur points to a node, traverse the list.
-     while (pCur != head)
-     {
-         // Display the value in this node.
-         // pCur->getData().hDdisplay();
-         
-          std::cout << pCur->getData();
-         
-         // Move to the next node.
-         pCur = pCur->getNext();
+    // While pCur points to a node, traverse the list.
+    while (pCur != head)
+    {
+        // Display the value in this node.
+        // pCur->getData().hDdisplay();
+
+        std::cout << pCur->getData();
+
+        // Move to the next node.
+        pCur = pCur->getNext();
     }
     std::cout << std::endl;
 }
@@ -132,11 +130,10 @@ void LinkedList<T>::displayListForw() const
 template <class T>
 void LinkedList<T>::displayListBack() const
 {
-   /* Write your code here */
-   
+    /* Write your code here */
+
     std::cout << std::endl;
 }
-
 
 //**************************************************
 // The searchList function looks for a target college
@@ -146,7 +143,7 @@ void LinkedList<T>::displayListBack() const
 template <class T>
 bool LinkedList<T>::searchList(const T &target, T &dataOut) const
 {
-   /* Write your code here */
+    /* Write your code here */
 
     return found;
 }
@@ -158,28 +155,25 @@ bool LinkedList<T>::searchList(const T &target, T &dataOut) const
 template <class T>
 LinkedList<T>::~LinkedList()
 {
-    ListNode<T> *pCur;     // To traverse the list
-    ListNode<T> *pNext;    // To hold the address of the next node
-    
+    ListNode<T> *pCur;  // To traverse the list
+    ListNode<T> *pNext; // To hold the address of the next node
+
     // Position nodePtr: skip the head of the list
     pCur = head->getNext();
     // While pCur is not at the end of the list...
-    while(pCur != head)
+    while (pCur != head)
     {
         // Save a pointer to the next node.
         pNext = pCur->getNext();
-        
+
         // Delete the current node.
         delete pCur;
-        
-         // Position pCur at the next node.
+
+        // Position pCur at the next node.
         pCur = pNext;
     }
-    
+
     delete head; // delete the sentinel node
 }
 
-
-
 #endif
-

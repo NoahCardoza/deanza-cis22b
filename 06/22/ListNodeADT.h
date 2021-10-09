@@ -1,6 +1,6 @@
 // Specification file for the ListNode class
-// IDE:
-// Written By:
+// Changed By: Noah Cardoza
+// IDE: VS Code
 #ifndef LISTNODE_H
 #define LISTNODE_H
 #include <iostream>
@@ -11,19 +11,17 @@ template <class T>
 class ListNode
 {
 private:
-    T data;      // store data
-    ListNode *forw;    // a pointer to the next node in the list
-    ListNode *back;    // a pointer to the previous node in the list
+    T data;         // store data
+    ListNode *forw; // a pointer to the next node in the list
+    ListNode *back; // a pointer to the previous node in the list
 public:
     //Constructor
-    ListNode(){forw = back = NULL;}
-    ListNode(const T &dataIn, ListNode *forw = NULL, ListNode *back = NULL){ data = dataIn;}
-    
+    ListNode() { forw = back = NULL; }
+    ListNode(const T &dataIn, ListNode *forw = NULL, ListNode *back = NULL) { data = dataIn; }
+
     // setters
 
     // getters
-
 };
-
 
 #endif

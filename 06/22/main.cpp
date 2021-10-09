@@ -9,19 +9,17 @@
 */
 
 // Written By: A. Student
-// Changed By:
-// IDE: Xcode
-
+// Changed By: Noah Cardoza
+// IDE: VS Code
 
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
-#include <cctype>  //  toupper()
+#include <cctype> //  toupper()
 
 #include "LinkedListADT.h"
 #include "College.h"
-
 
 using namespace std;
 
@@ -53,27 +51,27 @@ void buildList(const string &filename, LinkedList<College> &list)
     ifstream fin(filename);
     cout << "Reading data from \"" << filename << "\"";
 
-    if(!fin)
+    if (!fin)
     {
-        cout << "Error opening the input file: \""<< filename << "\"" << endl;
+        cout << "Error opening the input file: \"" << filename << "\"" << endl;
         exit(EXIT_FAILURE);
     }
 
     string line;
     while (getline(fin, line))
     {
-       int rank, cost;
-       string code, name;
-    
-       stringstream temp(line);   // create temp with data from line
-       temp >> rank;              // read from temp
-       temp >> code;
-       temp.ignore();             // to ignore space in front of name
-       getline(temp, name, ';');  // stop reading name at ';'
-       temp >> cost;
-       // create a College object and initialize it with data from file
-       College aCollege(rank, code, name, cost);
-       list.insertNode(aCollege);
+        int rank, cost;
+        string code, name;
+
+        stringstream temp(line); // create temp with data from line
+        temp >> rank;            // read from temp
+        temp >> code;
+        temp.ignore();            // to ignore space in front of name
+        getline(temp, name, ';'); // stop reading name at ';'
+        temp >> cost;
+        // create a College object and initialize it with data from file
+        College aCollege(rank, code, name, cost);
+        list.insertNode(aCollege);
     }
 
     fin.close();
@@ -91,17 +89,18 @@ void deleteManager(LinkedList<College> &list)
     cout << "\n Delete\n";
     cout << "=======\n";
 
-    while(toupper(targetCode[0]) != 'Q')
+    while (toupper(targetCode[0]) != 'Q')
     {
-        cout << endl << "Enter a college code (or Q to stop deleting) : \n";
+        cout << endl
+             << "Enter a college code (or Q to stop deleting) : \n";
         cin >> targetCode;
         cout << endl;
 
-        if(toupper(targetCode[0]) != 'Q')
+        if (toupper(targetCode[0]) != 'Q')
         {
             College target;
             target.setCode(targetCode);
-            if(list.deleteNode(target))
+            if (list.deleteNode(target))
                 cout << targetCode << " has been deleted!\n";
             else
                 cout << "College \"" << targetCode << "\" was not found in this list." << endl;
@@ -120,16 +119,16 @@ void searchManager(const LinkedList &list)
     College aCollege;
 
     cout << "\n Search\n";
-    cout <<   "=======\n";
+    cout << "=======\n";
 
-    while(toupper(targetCode[0]) != 'Q')
+    while (toupper(targetCode[0]) != 'Q')
     {
         cout << "\nEnter a college code (or Q to stop searching) : \n";
         cin >> targetCode;
 
-        if(toupper(targetCode[0]) != 'Q')
+        if (toupper(targetCode[0]) != 'Q')
         {
-            if(/* Write your code here: call searchList() */ )
+            if (/* Write your code here: call searchList() */)
                 aCollege.vDisplay();
             else
                 cout << "College \"" << targetCode << "\" was not found in this list." << endl;
@@ -147,23 +146,24 @@ Input Parameter: list
 void displayManager(const LinkedList &list)
 {
     string action;
-    
+
     cout << "\nDisplay list [F/B/N]? ";
     cin >> action;
     char option = toupper(action[0]);
-    
+
     if (option == 'F' || option == 'B')
     {
         cout << "\n====== ==== ============================= =========\n"
              << " Code  Rank         Name                     Cost  \n"
              << "====== ==== ============================= =========\n";
-        
+
         if (option == 'F')
             /* Write your code here: to display the list from A to Z */
-        else
-            /* Write your code here: to display the list from Z to A  */
-        
-        cout << "====== ==== ============================= =========\n";
-        cout << "Number of colleges in this list: " << l/* Write your code here */ << endl;
+            else
+                /* Write your code here: to display the list from Z to A  */
+
+                cout
+                << "====== ==== ============================= =========\n";
+        cout << "Number of colleges in this list: " << l /* Write your code here */ << endl;
     }
 }
