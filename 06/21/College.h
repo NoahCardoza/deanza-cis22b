@@ -1,44 +1,43 @@
 // Specification file for the College class
 // Written By: A. Student
-// Changed By:
-// IDE: Xcode
+// Changed By: Noah Cardoza
+// IDE: VS Code
 
 #ifndef COLLEGE_H
 #define COLLEGE_H
 
-#include<string>
+#include <string>
 
 using std::string;
 
 class College
 {
-    private:
-        string code;
-        string name;
-        int rank;
-        int cost;
+private:
+    string code;
+    string name;
+    int rank;
+    int cost;
 
-    public:
-        //constructors
-        College();
-        College(int, string, string, int);
+public:
+    //constructors
+    College();
+    College(int, string, string, int);
 
-        //setters
-        void setCode(string cd){ code = cd;}
-        void setName(string nm){ name = nm;}
-        void setRank(int rk){ rank = rk;}
-        void setCost(int cs){ cost = cs;}
+    //setters
+    void setCode(string cd) { code = cd; }
+    void setName(string nm) { name = nm; }
+    void setRank(int rk) { rank = rk; }
+    void setCost(int cs) { cost = cs; }
 
-        //getters
-        string getCode() const {return code;}
-        string getName() const {return name;}
-        int getRank() const {return rank;}
-        int getCost() const {return cost;}
+    //getters
+    string getCode() const { return code; }
+    string getName() const { return name; }
+    int getRank() const { return rank; }
+    int getCost() const { return cost; }
 
-        //other functions
-        void hDdisplay()const;
-        void vDisplay()const;
-    
+    //other functions
+    void hDdisplay() const;
+    void vDisplay() const;
 };
 
 #endif

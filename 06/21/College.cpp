@@ -1,8 +1,7 @@
 // Implementation file for the College class
 // Written By: A. Student
-// Changed By:
-// IDE: Xcode
-
+// Changed By: Noah Cardoza
+// IDE: VS Code
 
 #include <iostream>
 #include <iomanip>
@@ -43,7 +42,7 @@ void College::hDdisplay() const
     cout << left;
     cout << " " << setw(4) << code << "  ";
     cout << " " << setw(2) << rank << "  ";
-    cout << " " << setw(27)<< name << "  ";
+    cout << " " << setw(27) << name << "  ";
     cout << right;
     cout << " " << setw(7) << cost << " ";
     cout << left << endl;
@@ -59,4 +58,3 @@ void College::vDisplay() const
     cout << "       School Name: " << name << endl;
     cout << "Cost of Attendance: $" << cost << endl;
 }
-

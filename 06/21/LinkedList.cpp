@@ -1,7 +1,7 @@
 // Implementation file for the LinkedList class
 // Written By: A. Student
-// Changed By:
-// IDE: Xcode
+// Changed By: Noah Cardoza
+// IDE: VS Code
 
 #include <iostream>
 #include "LinkedList.h"
@@ -30,10 +30,10 @@ LinkedList::LinkedList()
 //**************************************************
 void LinkedList::insertNode(College dataIn)
 {
-    ListNode *newNode;  // A new node
-    ListNode *pCur;     // To traverse the list
-    ListNode *pPre;     // The previous node
-    
+    ListNode *newNode; // A new node
+    ListNode *pCur;    // To traverse the list
+    ListNode *pPre;    // The previous node
+
     // Allocate a new node and store num there.
     newNode = new ListNode(dataIn);
 
@@ -45,15 +45,15 @@ void LinkedList::insertNode(College dataIn)
     {
         pCur = pCur->getNext();
     }
-    
+
     // Insert the new node between pPre and pCur
     pPre = pCur->getPrev();
     pPre->setNext(newNode);
     newNode->setNext(pCur);
-    
-   /* Write your code here */
-    
-    
+
+    pCur->setPrev(newNode);
+    newNode->setPrev(pPre);
+
     // Update the counter
     length++;
 }
@@ -65,10 +65,8 @@ void LinkedList::insertNode(College dataIn)
 //**************************************************
 bool LinkedList::deleteNode(string target)
 {
-    ListNode *pCur;       // To traverse the list
-    ListNode *pPre;       // To point to the previous node
-    bool deleted = false;
-    
+    ListNode *pCur; // To traverse the list
+
     // Initialize pointers
     pCur = head->getNext();
 
@@ -77,22 +75,21 @@ bool LinkedList::deleteNode(string target)
     {
         pCur = pCur->getNext();
     }
-    
-    // If found, delte the node
+
+    // If found, delete the node
     if (pCur->getData().getCode() == target)
     {
-        pPre = pCur->getPrev();
-        pPre->setNext(pCur->getNext());
-        
-      /* Write your code here */
-        
-        delete pCur;
-        deleted = true;
-        length--;
-    }
-    return deleted;
-}
+        pCur->getPrev()->setNext(pCur->getNext());
+        pCur->getNext()->setPrev(pCur->getPrev());
 
+        delete pCur;
+        length--;
+
+        return true;
+    }
+
+    return false;
+}
 
 //**************************************************
 // displayList shows the value
@@ -101,19 +98,19 @@ bool LinkedList::deleteNode(string target)
 //**************************************************
 void LinkedList::displayListForw() const
 {
-     ListNode *pCur;  // To move through the list
+    ListNode *pCur; // To move through the list
 
-     // Position pCur: skip the head of the list.
-     pCur = head->getNext();
+    // Position pCur: skip the head of the list.
+    pCur = head->getNext();
 
-     // While pCur points to a node, traverse the list.
-     while (pCur != head)
-     {
-         // Display the value in this node.
-         pCur->getData().hDdisplay();
-         
-         // Move to the next node.
-         pCur = pCur->getNext();
+    // While pCur points to a node, traverse the list.
+    while (pCur != head)
+    {
+        // Display the value in this node.
+        pCur->getData().hDdisplay();
+
+        // Move to the next node.
+        pCur = pCur->getNext();
     }
     cout << endl;
 }
@@ -125,11 +122,22 @@ void LinkedList::displayListForw() const
 //**************************************************
 void LinkedList::displayListBack() const
 {
-   /* Write your code here */
- 
+    ListNode *pCur; // To move through the list
+
+    // Position pCur: skip the head of the list.
+    pCur = head->getPrev();
+
+    // While pCur points to a node, traverse the list.
+    while (pCur != head)
+    {
+        // Display the value in this node.
+        pCur->getData().hDdisplay();
+
+        // Move to the next node.
+        pCur = pCur->getPrev();
+    }
     cout << endl;
 }
-
 
 //**************************************************
 // The searchList function looks for a target college
@@ -139,17 +147,24 @@ void LinkedList::displayListBack() const
 bool LinkedList::searchList(string target, College &dataOut) const
 {
     bool found = false; // assume target not found
-    ListNode *pCur;         // To move through the list
-    
+    ListNode *pCur;     // To move through the list
+
     // Position pCur: skip the head of the list.
     pCur = head->getNext();
+
     // Find location: skip all nodes whose code is less than target
-   /* Write your code here */
- 
- 
+    while (pCur && target > pCur->getData().getCode())
+    {
+        pCur = pCur->getNext();
+    }
+
     // If found, copy data to the output parameter, and change the flag to true
-   /* Write your code here */
- 
+    if (pCur && target == pCur->getData().getCode())
+    {
+        found = true;
+        dataOut = pCur->getData();
+    }
+
     return found;
 }
 
@@ -159,23 +174,23 @@ bool LinkedList::searchList(string target, College &dataOut) const
 //**************************************************
 LinkedList::~LinkedList()
 {
-    ListNode *pCur;     // To traverse the list
-   ListNode *pNext;    // To hold the address of the next node
-    
+    ListNode *pCur;  // To traverse the list
+    ListNode *pNext; // To hold the address of the next node
+
     // Position nodePtr: skip the head of the list
     pCur = head->getNext();
     // While pCur is not at the end of the list...
-    while(pCur != head)
+    while (pCur != head)
     {
         // Save a pointer to the next node.
         pNext = pCur->getNext();
-        
+
         // Delete the current node.
         delete pCur;
-        
-         // Position pCur at the next node.
+
+        // Position pCur at the next node.
         pCur = pNext;
     }
-    
+
     delete head; // delete the sentinel node
 }
