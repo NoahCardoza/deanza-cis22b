@@ -10,7 +10,6 @@
 // Changed By:
 // IDE: Xcode
 
-
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -47,27 +46,27 @@ void buildList(const string &filename, LinkedList &list)
     ifstream fin(filename);
     cout << "Reading data from \"" << filename << "\"";
 
-    if(!fin)
+    if (!fin)
     {
-        cout << "Error opening the input file: \""<< filename << "\"" << endl;
+        cout << "Error opening the input file: \"" << filename << "\"" << endl;
         exit(EXIT_FAILURE);
     }
 
     string line;
     while (getline(fin, line))
     {
-       int rank, cost;
-       string code, name;
-    
-       stringstream temp(line);   // create temp with data from line
-       temp >> rank;              // read from temp
-       temp >> code;
-       temp.ignore();             // to ignore space in front of name
-       getline(temp, name, ';');  // stop reading name at ';'
-       temp >> cost;
-       // create a College object and initialize it with data from file
-       College aCollege(rank, code, name, cost);
-       list.insertNode(aCollege);
+        int rank, cost;
+        string code, name;
+
+        stringstream temp(line); // create temp with data from line
+        temp >> rank;            // read from temp
+        temp >> code;
+        temp.ignore();            // to ignore space in front of name
+        getline(temp, name, ';'); // stop reading name at ';'
+        temp >> cost;
+        // create a College object and initialize it with data from file
+        College aCollege(rank, code, name, cost);
+        list.insertNode(aCollege);
     }
 
     fin.close();
@@ -85,15 +84,16 @@ void deleteManager(LinkedList &list)
     cout << "\n Delete\n";
     cout << "=======\n";
 
-    while(targetCode != "Q")
+    while (targetCode != "Q")
     {
-        cout << endl << "Enter a college code (or Q to stop deleting) : \n";
+        cout << endl
+             << "Enter a college code (or Q to stop deleting) : \n";
         cin >> targetCode;
         cout << endl;
 
-        if(targetCode != "Q")
+        if (targetCode != "Q")
         {
-            if(/* Write your code here: call deleteNode */)
+            if (0)
                 cout << targetCode << " has been deleted!\n";
             else
                 cout << "College \"" << targetCode << "\" was not found in this list." << endl;
@@ -112,16 +112,16 @@ void searchManager(const LinkedList &list)
     College aCollege;
 
     cout << "\n Search\n";
-    cout <<   "=======\n";
+    cout << "=======\n";
 
-    while(targetCode != "Q")
+    while (targetCode != "Q")
     {
         cout << "\nEnter a college code (or Q to stop searching) : \n";
         cin >> targetCode;
 
-        if(targetCode != "Q")
+        if (targetCode != "Q")
         {
-            if(/* Write your code here: call searchList */)
+            if (0)
                 aCollege.vDisplay();
             else
                 cout << "College \"" << targetCode << "\" was not found in this list." << endl;
@@ -139,18 +139,18 @@ Input Parameter: list
 void displayManager(const LinkedList &list)
 {
     string action;
-    
+
     cout << "\nDisplay list [Y/N]? ";
     cin >> action;
 
-    if(action == "Y" || action == "y")
+    if (action == "Y" || action == "y")
     {
         cout << "\n====== ==== ============================= =========\n"
              << " Code  Rank         Name                     Cost  \n"
              << "====== ==== ============================= =========\n";
-        
+
         /* Write your code here: call displayList */
-        
+
         cout << "====== ==== ============================= =========\n";
     }
     cout << "Number of colleges in this list: " << /* Write your code here: call getLength */ endl;
