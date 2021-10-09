@@ -1,9 +1,9 @@
 // Sorted Circular Doubly-Linked List with Sentinel Node
 // Implementation file for the Student List class
-// Modified by:
-// IDE:
+// Modified by: Noah Cardoza
+// IDE: VS Code
 
-#include <iostream>         // For cout  and NULL
+#include <iostream> // For cout  and NULL
 #include "StudentList.h"
 using namespace std;
 
@@ -18,7 +18,7 @@ using namespace std;
 StudentList::StudentList()
 {
     head = new ListNode; // head points to the sentinel node
-    
+
     head->stu.gpa = -1;
     head->stu.name = "";
     head->forw = head;
@@ -34,7 +34,7 @@ StudentList::StudentList()
 
 void StudentList::displayListForw() const
 {
-    ListNode *pCur;  // To move through the list
+    ListNode *pCur; // To move through the list
 
     // Position pCur: skip the head of the list.
     pCur = head->forw;
@@ -66,16 +66,16 @@ void StudentList::displayListBack() const
 //**************************************************
 void StudentList::insertNode(Student dataIn)
 {
-    ListNode *newNode;  // A new node
-    ListNode *pCur;     // To traverse the list
-    
+    ListNode *newNode; // A new node
+    ListNode *pCur;    // To traverse the list
+
     // Allocate a new node and store num there.
     newNode = new ListNode;
     newNode->stu = dataIn;
 
     // Initialize pointers
     pCur = head->forw;
-   
+
     // Find location: skip all nodes whose name is less than dataIn's name
     while (pCur != head && pCur->stu.name < dataIn.name)
     {
@@ -83,12 +83,12 @@ void StudentList::insertNode(Student dataIn)
     }
 
     // Insert the new node between pPre and pCur
-    ListNode *pPre = pCur->back;     // The previous node
+    ListNode *pPre = pCur->back; // The previous node
     pPre->forw = newNode;
     newNode->forw = pCur;
-    
-     /* Write your code here */
-    
+
+    /* Write your code here */
+
     // Update the counter
     count++;
 }
@@ -99,15 +99,13 @@ void StudentList::insertNode(Student dataIn)
 //**************************************************
 bool StudentList::deleteNode(string target)
 {
-    ListNode *pCur;     // To traverse the list
+    ListNode *pCur; // To traverse the list
     bool success = false;
-    
+
     /* Write your code here */
- 
+
     return success;
 }
-
-
 
 //**************************************************
 // Destructor                                      *
@@ -115,5 +113,4 @@ bool StudentList::deleteNode(string target)
 //**************************************************
 StudentList::~StudentList()
 {
-  
 }

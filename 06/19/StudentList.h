@@ -1,7 +1,7 @@
 // Sorted Circular Doubly-Linked List with Sentinel Node
 // Specification file for the Student List class
-// Modified by:
-// IDE:
+// Modified by: Noah Cardoza
+// IDE: VS Code
 
 #ifndef STUDENTLIST_H
 #define STUDENTLIST_H
