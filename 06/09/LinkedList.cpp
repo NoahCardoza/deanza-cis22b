@@ -1,7 +1,7 @@
 // Implementation file for the LinkedList class
 // Written By: A. Student
-// Changed By:
-// IDE: Xcode
+// Changed By: Noah Cardoza
+// IDE: Vs Code
 
 #include <iostream>
 #include "LinkedList.h"
@@ -29,10 +29,10 @@ LinkedList::LinkedList()
 //**************************************************
 void LinkedList::insertNode(College dataIn)
 {
-    Node *newNode;  // A new node
-    Node *pCur;     // To traverse the list
-    Node *pPre;     // The previous node
-    
+    Node *newNode; // A new node
+    Node *pCur;    // To traverse the list
+    Node *pPre;    // The previous node
+
     // Allocate a new node and store num there.
     newNode = new Node;
     newNode->college = dataIn;
@@ -47,11 +47,11 @@ void LinkedList::insertNode(College dataIn)
         pPre = pCur;
         pCur = pCur->next;
     }
-    
+
     // Insert the new node between pPre and pCur
     pPre->next = newNode;
     newNode->next = pCur;
-    
+
     // Update the counter
     length++;
 }
@@ -63,10 +63,10 @@ void LinkedList::insertNode(College dataIn)
 //**************************************************
 bool LinkedList::deleteNode(string target)
 {
-    Node *pCur;       // To traverse the list
-    Node *pPre;       // To point to the previous node
+    Node *pCur; // To traverse the list
+    Node *pPre; // To point to the previous node
     bool deleted = false;
-    
+
     // Initialize pointers
     pPre = head;
     pCur = head->next;
@@ -77,7 +77,7 @@ bool LinkedList::deleteNode(string target)
         pPre = pCur;
         pCur = pCur->next;
     }
-    
+
     // If found, delte the node
     if (pCur && pCur->college.getCode() == target)
     {
@@ -89,7 +89,6 @@ bool LinkedList::deleteNode(string target)
     return deleted;
 }
 
-
 //**************************************************
 // displayList shows the value
 // stored in each node of the linked list
@@ -97,19 +96,19 @@ bool LinkedList::deleteNode(string target)
 //**************************************************
 void LinkedList::displayList() const
 {
-     Node *pCur;  // To move through the list
+    Node *pCur; // To move through the list
 
-     // Position pCur: skip the head of the list.
-     pCur = head->next;
+    // Position pCur: skip the head of the list.
+    pCur = head->next;
 
-     // While pCur points to a node, traverse the list.
-     while (pCur)
-     {
-         // Display the value in this node.
-         pCur->college.hDdisplay();
-         
-         // Move to the next node.
-         pCur = pCur->next;
+    // While pCur points to a node, traverse the list.
+    while (pCur)
+    {
+        // Display the value in this node.
+        cout << pCur->college;
+
+        // Move to the next node.
+        pCur = pCur->next;
     }
     cout << endl;
 }
@@ -123,9 +122,20 @@ bool LinkedList::searchList(string target, College &dataOut) const
 {
     bool found = false; // assume target not found
     Node *pCur;         // To move through the list
-    
-    /* Write your code here */
-    
+
+    pCur = head->next;
+
+    while (pCur && target > pCur->college.getCode())
+    {
+        pCur = pCur->next;
+    }
+
+    if (pCur && target == pCur->college.getCode())
+    {
+        found = true;
+        dataOut = pCur->college;
+    }
+
     return found;
 }
 
@@ -135,24 +145,23 @@ bool LinkedList::searchList(string target, College &dataOut) const
 //**************************************************
 LinkedList::~LinkedList()
 {
-    Node *pCur;     // To traverse the list
-    Node *pNext;    // To hold the address of the next node
-    
+    Node *pCur;  // To traverse the list
+    Node *pNext; // To hold the address of the next node
+
     // Position nodePtr: skip the head of the list
     pCur = head->next;
     // While pCur is not at the end of the list...
-    while(pCur != NULL)
+    while (pCur != NULL)
     {
         // Save a pointer to the next node.
         pNext = pCur->next;
-        
+
         // Delete the current node.
         delete pCur;
-        
-         // Position pCur at the next node.
+
+        // Position pCur at the next node.
         pCur = pNext;
     }
-    
+
     delete head; // delete the sentinel node
 }
-

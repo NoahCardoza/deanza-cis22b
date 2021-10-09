@@ -7,8 +7,8 @@
 */
 
 // Written By: A. Student
-// Changed By:
-// IDE: Xcode
+// Changed By: Noah Cardoza
+// IDE: Vs Code
 
 #include <iostream>
 #include <fstream>
@@ -65,6 +65,7 @@ void buildList(const string &filename, LinkedList &list)
         getline(temp, name, ';'); // stop reading name at ';'
         temp >> cost;
         // create a College object and initialize it with data from file
+
         College aCollege(rank, code, name, cost);
         list.insertNode(aCollege);
     }
@@ -93,7 +94,7 @@ void deleteManager(LinkedList &list)
 
         if (targetCode != "Q")
         {
-            if (0)
+            if (list.deleteNode(targetCode))
                 cout << targetCode << " has been deleted!\n";
             else
                 cout << "College \"" << targetCode << "\" was not found in this list." << endl;
@@ -121,7 +122,7 @@ void searchManager(const LinkedList &list)
 
         if (targetCode != "Q")
         {
-            if (0)
+            if (list.searchList(targetCode, aCollege))
                 aCollege.vDisplay();
             else
                 cout << "College \"" << targetCode << "\" was not found in this list." << endl;
@@ -149,9 +150,9 @@ void displayManager(const LinkedList &list)
              << " Code  Rank         Name                     Cost  \n"
              << "====== ==== ============================= =========\n";
 
-        /* Write your code here: call displayList */
+        list.displayList();
 
         cout << "====== ==== ============================= =========\n";
     }
-    cout << "Number of colleges in this list: " << /* Write your code here: call getLength */ endl;
+    cout << "Number of colleges in this list: " << list.getLength() << endl;
 }

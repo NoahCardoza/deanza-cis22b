@@ -1,7 +1,7 @@
 // Specification file for the LinkedList class
 // Written By: A. Student
-// Changed By:
-// IDE: Xcode
+// Changed By: Noah Cardoza
+// IDE: Vs Code
 
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
@@ -20,11 +20,11 @@ private:
     int length;
 
 public:
-    LinkedList();   // constructor
-    ~LinkedList();  // destructor
+    LinkedList();  // constructor
+    ~LinkedList(); // destructor
 
     // Linked list operations
-    int getLength() const {return length;}
+    int getLength() const { return length; }
     void insertNode(College);
     bool deleteNode(string);
     void displayList() const;
