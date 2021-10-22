@@ -1,4 +1,4 @@
-#include "BinarySearchTree.h"  // BST ADT
+#include "BinarySearchTree.h" // BST ADT
 #include <iostream>
 #include <string>
 
@@ -12,14 +12,14 @@ void iDisplay(int &, int);
 int main()
 {
     BinarySearchTree<int> bst;
-    
+
     int n;
-    
+
     cout << "What is the number of nodes in the BST? " << endl;
     cin >> n;
-    
+
     buildBST(n, bst);
-    
+
     cout << "Inorder: ";
     bst.inOrder(hDisplay);
     cout << endl;
@@ -40,7 +40,7 @@ int main()
     }
 
     return 0;
-}  
+}
 /*
  buildBST: builds a binary search tree
  of integers
@@ -48,10 +48,10 @@ int main()
 void buildBST(int n, BinarySearchTree<int> &bst)
 {
     int item;
-    
-    while(n--)
+
+    while (n--)
     {
-        item = rand( ) % 30 + 10;
+        item = rand() % 30 + 10;
         bst.insert(item);
     }
 }
@@ -59,7 +59,7 @@ void buildBST(int n, BinarySearchTree<int> &bst)
 /*
  horizontal display: all items on one line
 */
-void hDisplay (int &item)
+void hDisplay(int &item)
 {
     cout << item << " ";
 }
@@ -67,7 +67,7 @@ void hDisplay (int &item)
 /*
  vertical display: one item per line
 */
-void vDisplay (int &item)
+void vDisplay(int &item)
 {
     cout << item << endl;
 }
@@ -80,5 +80,4 @@ void iDisplay(int &item, int level)
     for (int i = 1; i < level; i++)
         cout << "..";
     cout << level << "). " << item << endl;
-    
 }
