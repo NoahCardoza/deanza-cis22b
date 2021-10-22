@@ -1,4 +1,4 @@
-#include "BinarySearchTree.h"  // BST ADT
+#include "BinarySearchTree.h" // BST ADT
 #include "College.h"
 #include <iostream>
 #include <iomanip>
@@ -21,16 +21,17 @@ int main()
 
     cout << "What is the input file's name? ";
     cin >> filename;
-     /* Write your code here: build the BST from an input file  */
-     
+    /* Write your code here: build the BST from an input file  */
+
     char option;
     cout << "Display Inorder [Y/N]? ";
     cin >> option;
     if (option == 'y' || option == 'Y')
     {
-        cout << endl << "Inorder: " << endl;
+        cout << endl
+             << "Inorder: " << endl;
         /* Write your code here: use hDisplay */
-        
+
         cout << endl;
     }
     cout << "Display Indented List [Y/N]? ";
@@ -45,28 +46,27 @@ int main()
     cin >> option;
     if (option == 'y' || option == 'Y')
     {
-        cout  << "Leaf Nodes: " << endl;
+        cout << "Leaf Nodes: " << endl;
         /* Write your code here: use hDisplay */
         cout << endl;
     }
 
-   /* Write your code here: test driver for search (See previous homeowrk assignments  */
-   
+    /* Write your code here: test driver for search (See previous homeowrk assignments  */
+
     return 0;
 }
 
 /* Write your code here */
 
-
 /*
  horizontal display: all items on one line
 */
-void hDisplay (College &item)
+void hDisplay(College &item)
 {
     cout << left;
     cout << " " << setw(4) << item.getCode() << "  ";
     cout << " " << setw(2) << item.getRank() << "  ";
-    cout << " " << setw(27)<< item.getName() << "  ";
+    cout << " " << setw(27) << item.getName() << "  ";
     cout << right;
     cout << " " << setw(7) << item.getCost() << " ";
     cout << left << endl;
@@ -75,7 +75,7 @@ void hDisplay (College &item)
 /*
  vertical display: one item per line
 */
-void vDisplay (College &item)
+void vDisplay(College &item)
 {
     cout << "              Rank: " << item.getRank() << endl;
     cout << "       School Name: " << item.getName() << endl;
@@ -91,4 +91,3 @@ void iDisplay(College &item, int level)
         cout << "..";
     cout << level << "). " << item.getCode() << endl;
 }
-
