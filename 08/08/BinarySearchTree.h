@@ -1,15 +1,15 @@
 // Binary Search Tree ADT
 // Created by A. Student
 // Modified by: ???
- 
+
 #ifndef _BINARY_SEARCH_TREE
 #define _BINARY_SEARCH_TREE
 
 #include "BinaryTree.h"
 
-template<class ItemType>
+template <class ItemType>
 class BinarySearchTree : public BinaryTree<ItemType>
-{   
+{
 public:
     // insert a node at the correct location
     bool insert(const ItemType &item);
@@ -21,48 +21,45 @@ public:
     bool findSmallest(ItemType &returnedItem) const;
     // find the largest node
     bool findLargest(ItemType &returnedItem) const;
-    
+
 private:
-	// internal insert node: insert newNode in nodePtr subtree
-	BinaryNode<ItemType>* _insert(BinaryNode<ItemType>* nodePtr, BinaryNode<ItemType>* newNode);
-   
-	// search for target node
-	//BinaryNode<ItemType>* _search(BinaryNode<ItemType>* treePtr, const ItemType &target) const;
-    
+    // internal insert node: insert newNode in nodePtr subtree
+    BinaryNode<ItemType> *_insert(BinaryNode<ItemType> *nodePtr, BinaryNode<ItemType> *newNode);
+
+    // search for target node
+    //BinaryNode<ItemType>* _search(BinaryNode<ItemType>* treePtr, const ItemType &target) const;
+
     // find the smallest node
-    BinaryNode<ItemType>* _findSmallest(BinaryNode<ItemType>* nodePtr, ItemType &smallest) const;
-    
+    BinaryNode<ItemType> *_findSmallest(BinaryNode<ItemType> *nodePtr, ItemType &smallest) const;
+
     // find the biggest node
-    BinaryNode<ItemType>* _findLargest(BinaryNode<ItemType>* nodePtr, ItemType &smallest) const;
-   
+    BinaryNode<ItemType> *_findLargest(BinaryNode<ItemType> *nodePtr, ItemType &smallest) const;
+
     // internal remove node: locate and delete target node under nodePtr subtree
     // BinaryNode<ItemType>* _remove(BinaryNode<ItemType>* nodePtr, const ItemType target, bool &success);
-    
-     // delete target node from tree, called by internal remove node
-   //  BinaryNode<ItemType>* _removeNode(BinaryNode<ItemType>* targetNodePtr);
-    
-     // remove the leftmost node in the left subtree of nodePtr
-   //  BinaryNode<ItemType>* _removeLeftmostNode(BinaryNode<ItemType>* nodePtr, ItemType &successor);
-    
-};
 
+    // delete target node from tree, called by internal remove node
+    //  BinaryNode<ItemType>* _removeNode(BinaryNode<ItemType>* targetNodePtr);
+
+    // remove the leftmost node in the left subtree of nodePtr
+    //  BinaryNode<ItemType>* _removeLeftmostNode(BinaryNode<ItemType>* nodePtr, ItemType &successor);
+};
 
 ///////////////////////// public function definitions ///////////////////////////
 //Inserting items within a tree
-template<class ItemType>
-bool BinarySearchTree<ItemType>::insert(const ItemType & newEntry)
+template <class ItemType>
+bool BinarySearchTree<ItemType>::insert(const ItemType &newEntry)
 {
-	BinaryNode<ItemType>* newNodePtr = new BinaryNode<ItemType>(newEntry);
-	this->rootPtr = _insert(this->rootPtr, newNodePtr);
-	return true;
-}  
-
+    BinaryNode<ItemType> *newNodePtr = new BinaryNode<ItemType>(newEntry);
+    this->rootPtr = _insert(this->rootPtr, newNodePtr);
+    return true;
+}
 
 //Finding the smallest, which is the leftmost leaf (wrapper function)
-template<class ItemType>
-bool BinarySearchTree<ItemType>::findSmallest(ItemType & returnedItem) const
+template <class ItemType>
+bool BinarySearchTree<ItemType>::findSmallest(ItemType &returnedItem) const
 {
-    BinaryNode<ItemType>* temp = nullptr;
+    BinaryNode<ItemType> *temp = nullptr;
     temp = _findSmallest(this->rootPtr, returnedItem);
     if (temp) // != NULL
         return true;
@@ -70,35 +67,33 @@ bool BinarySearchTree<ItemType>::findSmallest(ItemType & returnedItem) const
 }
 
 //Finding the biggest, which is the rightmost leaf (wrapper function)
-template<class ItemType>
-bool BinarySearchTree<ItemType>::findLargest(ItemType & returnedItem) const
+template <class ItemType>
+bool BinarySearchTree<ItemType>::findLargest(ItemType &returnedItem) const
 {
-    BinaryNode<ItemType>* temp = nullptr;
+    BinaryNode<ItemType> *temp = nullptr;
     temp = _findLargest(this->rootPtr, returnedItem);
     if (temp) // != NULL
         return true;
     return false;
 }
 
-
-
 //////////////////////////// private functions ////////////////////////////////////////////
 
 //Implementation of the insert operation
-template<class ItemType>
-BinaryNode<ItemType>* BinarySearchTree<ItemType>::_insert(BinaryNode<ItemType>* nodePtr,
-                                                          BinaryNode<ItemType>* newNodePtr)
+template <class ItemType>
+BinaryNode<ItemType> *BinarySearchTree<ItemType>::_insert(BinaryNode<ItemType> *nodePtr,
+                                                          BinaryNode<ItemType> *newNodePtr)
 {
-    BinaryNode<ItemType>* pWalk = nodePtr, *parent = nullptr;
-    
-    if( !nodePtr) // == NULL
+    BinaryNode<ItemType> *pWalk = nodePtr, *parent = nullptr;
+
+    if (!nodePtr) // == NULL
     {
         nodePtr = newNodePtr;
         return nodePtr;
     }
     else
     {
-        while(pWalk) // != NULL
+        while (pWalk) // != NULL
         {
             parent = pWalk;
             if (pWalk->getItem() > newNodePtr->getItem())
@@ -116,18 +111,17 @@ BinaryNode<ItemType>* BinarySearchTree<ItemType>::_insert(BinaryNode<ItemType>* 
 }
 
 //Implementation to find the smallest: recursive
-template<class ItemType>
-BinaryNode<ItemType>* BinarySearchTree<ItemType>::_findSmallest(BinaryNode<ItemType>* nodePtr, ItemType & smallest) const
-{
- /* Write your code here */
-}
-
-//Implementation to find the largest: recursive
-template<class ItemType>
-BinaryNode<ItemType>* BinarySearchTree<ItemType>::_findLargest(BinaryNode<ItemType>* nodePtr, ItemType & biggest) const
+template <class ItemType>
+BinaryNode<ItemType> *BinarySearchTree<ItemType>::_findSmallest(BinaryNode<ItemType> *nodePtr, ItemType &smallest) const
 {
     /* Write your code here */
 }
 
+//Implementation to find the largest: recursive
+template <class ItemType>
+BinaryNode<ItemType> *BinarySearchTree<ItemType>::_findLargest(BinaryNode<ItemType> *nodePtr, ItemType &biggest) const
+{
+    /* Write your code here */
+}
 
 #endif
