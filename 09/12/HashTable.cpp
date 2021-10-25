@@ -1,6 +1,7 @@
 // Implementation file for the Hash class
 // Written By: A. Student
-// Changed by:
+// Changed by: Noah Cardoza
+// IDE: VS Code
 
 #include <string>
 
