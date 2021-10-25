@@ -7,24 +7,21 @@ using namespace std;
 
 int main()
 {
- 
-    Student list[] = {{"Tom", 2.5}, {"Bob", 3.2}, {"Boc", 3.2}, {"Linda", 3.9}, {"Tim", 4.0},
-        {"Vic", 3.9}, {"Ann", 3.5}, {"Dylan", 3.1}, {"obB", 2.2}, {"oBb", 3.7},
-        {"Bbo", 3.3}, {"bBo", 3.9}, {"boB", 2.3}, {"", 0}};
-    
+
+    Student list[] = {{"Tom", 2.5}, {"Bob", 3.2}, {"Boc", 3.2}, {"Linda", 3.9}, {"Tim", 4.0}, {"Vic", 3.9}, {"Ann", 3.5}, {"Dylan", 3.1}, {"obB", 2.2}, {"oBb", 3.7}, {"Bbo", 3.3}, {"bBo", 3.9}, {"boB", 2.3}, {"", 0}};
+
     HashTable hash;
-    
+
     // build hash from array
     for (int i = 0; list[i].getName() != ""; i++)
     {
         hash.insert(list[i]);
     }
-    
-        
+
     // test search
-    string target[] = {"Ann", "Daria","Tom", "Bob","Boc", "Linda", "Julia",
+    string target[] = {"Ann", "Daria", "Tom", "Bob", "Boc", "Linda", "Julia",
                        "Dylan", "obB", "oBb", "Bbo", "bBo", "boB", ""};
-    
+
     for (int i = 0; target[i] != ""; i++)
     {
         Student item;
@@ -35,11 +32,10 @@ int main()
         }
         else
             cout << target[i] << " not found!" << endl;
-            
     }
-    
+
     cout << "Load Factor: " << hash.getLoadFactor() << endl;
-  
+
     // Add a new item to the hash table;
     char option;
     cout << "Test hash insert[Y/N]? ";
@@ -67,13 +63,13 @@ int main()
         int nc;
         if (hash.search(found, nc, name))
         {
-            cout << endl << "Found: " << found.getName() << " " << found.getGpa() << " (" << nc << " collisions!)" << endl;
+            cout << endl
+                 << "Found: " << found.getName() << " " << found.getGpa() << " (" << nc << " collisions!)" << endl;
         }
         else
-            cout << endl << name << " not found!" << endl;
+            cout << endl
+                 << name << " not found!" << endl;
     }
-        
-    
-    
+
     return 0;
 }

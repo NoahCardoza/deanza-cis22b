@@ -23,12 +23,12 @@ int HashTable::_hash(string key) const
   hash insert - linear probe
 *~**/
 
-bool HashTable::insert( Student &itemIn )
+bool HashTable::insert(Student &itemIn)
 {
-    if ( count == hashSize)
+    if (count == hashSize)
         return false;
-   /* write your code here */
-   
+    /* write your code here */
+
     return true;
 }
 
@@ -36,7 +36,7 @@ bool HashTable::insert( Student &itemIn )
    hash delete - linear probe
 *~**/
 
-bool HashTable::remove( Student &itemOut )
+bool HashTable::remove(Student &itemOut)
 {
     return false;
 }
@@ -49,9 +49,9 @@ bool HashTable::remove( Student &itemOut )
       - returns true
    if not found, returns false
 *~**/
-bool HashTable::search( Student &itemOut, int &noCol, string key)
+bool HashTable::search(Student &itemOut, int &noCol, string key)
 {
-   /* write your code here */
-     
+    /* write your code here */
+
     return false;
 }
