@@ -1,6 +1,7 @@
 // Specification file for the Hash class
 // Written By: A. Student
-// Changed by:
+// Modified by: Noah Cardoza
+// IDE: VS Code
 
 #ifndef HASHTABLE_H_
 #define HASHTABLE_H_

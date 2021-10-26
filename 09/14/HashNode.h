@@ -1,6 +1,7 @@
 // Specification file for the HashNode class
 // Written By: A. Student
-// Changed by:
+// Modified by: Noah Cardoza
+// IDE: VS Code
 
 #ifndef _HASH_NODE
 #define _HASH_NODE

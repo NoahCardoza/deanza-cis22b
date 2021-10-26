@@ -1,3 +1,6 @@
+// Modified by: Noah Cardoza
+// IDE: VS Code
+
 #include <iostream>
 
 #include "HashTable.h"
