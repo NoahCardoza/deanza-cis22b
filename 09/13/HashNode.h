@@ -18,19 +18,32 @@ private:
 
 public:
     // constructors
-    HashNode() {occupied = 0; noCollisions = 0;}
-    HashNode(Student anItem) {item = anItem; occupied = 1; noCollisions = 0;}
+    HashNode()
+    {
+        occupied = 0;
+        noCollisions = 0;
+    }
+    HashNode(Student anItem)
+    {
+        item = anItem;
+        occupied = 1;
+        noCollisions = 0;
+    }
     HashNode(Student anItem, int ocp, int nCol)
-             {item = anItem; occupied = ocp; noCollisions = nCol;}
+    {
+        item = anItem;
+        occupied = ocp;
+        noCollisions = nCol;
+    }
     // setters
-    void setItem(const Student & anItem) {item = anItem;}
-    void setOccupied(int ocp) {occupied = ocp;}
-    void setNoCollisions(int nCol) {noCollisions = nCol;}
-    
+    void setItem(const Student &anItem) { item = anItem; }
+    void setOccupied(int ocp) { occupied = ocp; }
+    void setNoCollisions(int nCol) { noCollisions = nCol; }
+
     // getters
-    Student getItem() const {return item;}
-    int getOccupied() const {return occupied;}
-    int getNoCollisions() const {return noCollisions;}
+    Student getItem() const { return item; }
+    int getOccupied() const { return occupied; }
+    int getNoCollisions() const { return noCollisions; }
 };
 
 #endif

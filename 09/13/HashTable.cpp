@@ -23,12 +23,12 @@ int HashTable::_hash(string key) const
   hash insert - linear probe
 *~**/
 
-bool HashTable::insert( Student &itemIn )
+bool HashTable::insert(Student &itemIn)
 {
-    if ( count == hashSize)
+    if (count == hashSize)
         return false;
-   /* write your code here */
-   
+    /* write your code here */
+
     return true;
 }
 
@@ -42,10 +42,10 @@ bool HashTable::insert( Student &itemIn )
    - if not found - returns false
 *~**/
 
-bool HashTable::remove( Student &itemOut, string key)
+bool HashTable::remove(Student &itemOut, string key)
 {
     /* Write your code here */
-    
+
     return false;
 }
 
@@ -56,9 +56,9 @@ bool HashTable::remove( Student &itemOut, string key)
       - returns the number of collisions for this key 
    if not found, returns -1
 *~**/
-int HashTable::search( Student &itemOut, string key)
+int HashTable::search(Student &itemOut, string key)
 {
-   /* write your code here */
-     
+    /* write your code here */
+
     return false;
 }
