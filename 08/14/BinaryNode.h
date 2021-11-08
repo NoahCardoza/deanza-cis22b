@@ -1,6 +1,8 @@
 #ifndef _BINARY_NODE
 #define _BINARY_NODE
 
+#include <iostream>
+
 template <class ItemType>
 class BinaryNode
 {
@@ -36,7 +38,10 @@ public:
     BinaryNode<ItemType> *getRightPtr() const { return rightPtr; }
 
     // other functions
-    bool isLeaf() const { return (leftPtr == 0 && rightPtr == 0); }
+    bool isLeaf() const
+    {
+        return (!leftPtr && !rightPtr);
+    }
 };
 
 #endif

@@ -1,44 +1,51 @@
 // Specification file for the College class
 // Written By: A. Student
-// Changed By:
-// IDE: Xcode
+// Changed By: Noah Cardoza
+// IDE: VS Code
 
 #ifndef COLLEGE_H
 #define COLLEGE_H
 
 #include <string>
 
-using std::ostream;
 using std::string;
-
-class College; // Forward Declaration
-
-// Function Prototypes for Overloaded Stream Operators
-ostream &operator<<(ostream &, const College &);
 
 class College
 {
 private:
-    /* Write your code here */
+    string code;
+    string name;
+    int rank;
+    int cost;
 
 public:
     //constructors
-    /* Write your code here */
+    College();
+    College(int, string, string, int);
 
     //setters
-    /* Write your code here */
+    void setCode(string cd) { code = cd; }
+    void setName(string nm) { name = nm; }
+    void setRank(int rk) { rank = rk; }
+    void setCost(int cs) { cost = cs; }
 
     //getters
-    /* Write your code here */
+    string getCode() const { return code; }
+    string getName() const { return name; }
+    int getRank() const { return rank; }
+    int getCost() const { return cost; }
 
-    //other functions if any
-    /* Write your code here */
+    //other functions
+    void hDdisplay() const;
+    void vDisplay() const;
 
     // overloaded operators
-    /* Write your code here */
 
-    // Friends
-    friend ostream &operator<<(ostream &, const College &);
+    friend std::ostream &operator<<(std::ostream &output, const College &C);
+
+    bool operator<(const College &c) const;
+    bool operator>(const College &c) const;
+    bool operator==(const College &c) const;
 };
 
 #endif

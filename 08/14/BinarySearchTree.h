@@ -63,55 +63,59 @@ template <class ItemType>
 bool BinarySearchTree<ItemType>::search(const ItemType &anEntry, ItemType &returnedItem) const
 {
     BinaryNode<ItemType> *temp = nullptr;
-    /* Write your code here */
+    temp = _search(this->rootPtr, anEntry);
+    if (temp)
+    {
+        returnedItem = temp->getItem();
+        return true;
+    }
     return false;
 }
-
 //////////////////////////// private functions ////////////////////////////////////////////
 
 //Implementation of the insert operation
-template <class ItemType>
-BinaryNode<ItemType> *BinarySearchTree<ItemType>::_insert(BinaryNode<ItemType> *nodePtr,
-                                                          BinaryNode<ItemType> *newNodePtr)
+template <class T>
+BinaryNode<T> *BinarySearchTree<T>::_insert(BinaryNode<T> *node, BinaryNode<T> *newNode)
 {
-    BinaryNode<ItemType> *pWalk = nodePtr, *parent = nullptr;
-
-    if (!nodePtr) // == NULL
+    if (!node)
     {
-        nodePtr = newNodePtr;
-        return nodePtr;
+        return newNode;
+    }
+
+    if (newNode->getItem() < node->getItem())
+    {
+        node->setLeftPtr(_insert(node->getLeftPtr(), newNode));
     }
     else
     {
-        while (pWalk) // != NULL
-        {
-            parent = pWalk;
-            if (pWalk->getItem() > newNodePtr->getItem())
-                pWalk = pWalk->getLeftPtr();
-            else
-                pWalk = pWalk->getRightPtr();
-        }
-        if (parent->getItem() > newNodePtr->getItem())
-            parent->setLeftPtr(newNodePtr);
-        else
-            parent->setRightPtr(newNodePtr);
+        node->setRightPtr(_insert(node->getRightPtr(), newNode));
     }
 
-    return nodePtr;
+    return node;
 }
 
 //Implementation for the search operation
 // - return NULL if target not found, otherwise
 // - returns a pointer to the node that matched the target
-template <class ItemType>
-BinaryNode<ItemType> *BinarySearchTree<ItemType>::_search(BinaryNode<ItemType> *nodePtr,
-                                                          const ItemType &target) const
+template <class T>
+BinaryNode<T> *BinarySearchTree<T>::_search(BinaryNode<T> *node, const T &target) const
 {
-    BinaryNode<ItemType> *found = nullptr;
+    if (!node)
+    {
+        return nullptr;
+    }
 
-    /* Write your code here */
+    if (target < node->getItem())
+    {
+        return _search(node->getLeftPtr(), target);
+    }
 
-    return found;
+    if (target > node->getItem())
+    {
+        return _search(node->getRightPtr(), target);
+    }
+
+    return node;
 }
 
 #endif

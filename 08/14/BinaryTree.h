@@ -37,6 +37,7 @@ public:
     void inOrder(void visit(ItemType &)) const { _inorder(visit, rootPtr); }
     void postOrder(void visit(ItemType &)) const { _postorder(visit, rootPtr); }
     void printTree(void visit(ItemType &, int)) const { _printTree(visit, rootPtr, 1); }
+    void leafIter(void visit(ItemType &)) const { _leafIter(visit, rootPtr); }
 
     // abstract functions to be implemented by derived class
     virtual bool insert(const ItemType &newData) = 0;
@@ -49,6 +50,7 @@ private:
 
     // internal traverse
     void _preorder(void visit(ItemType &), BinaryNode<ItemType> *nodePtr) const;
+    void _leafIter(void visit(ItemType &), BinaryNode<ItemType> *nodePtr) const;
     void _inorder(void visit(ItemType &), BinaryNode<ItemType> *nodePtr) const;
     void _postorder(void visit(ItemType &), BinaryNode<ItemType> *nodePtr) const;
     void _printTree(void visit(ItemType &, int), BinaryNode<ItemType> *nodePtr, int level) const;
@@ -87,6 +89,23 @@ void BinaryTree<ItemType>::_inorder(void visit(ItemType &), BinaryNode<ItemType>
     }
 }
 
+// Leaf Traversal
+template <class ItemType>
+void BinaryTree<ItemType>::_leafIter(void visit(ItemType &), BinaryNode<ItemType> *nodePtr) const
+{
+    if (nodePtr) // != NULL
+    {
+        if (nodePtr->isLeaf())
+        {
+            ItemType item = nodePtr->getItem();
+            return visit(item);
+        }
+
+        _leafIter(visit, nodePtr->getLeftPtr());
+        _leafIter(visit, nodePtr->getRightPtr());
+    }
+}
+
 //Postorder Traversal
 template <class ItemType>
 void BinaryTree<ItemType>::_postorder(void visit(ItemType &), BinaryNode<ItemType> *nodePtr) const
@@ -98,7 +117,13 @@ void BinaryTree<ItemType>::_postorder(void visit(ItemType &), BinaryNode<ItemTyp
 template <class ItemType>
 void BinaryTree<ItemType>::_printTree(void visit(ItemType &, int), BinaryNode<ItemType> *nodePtr, int level) const
 {
-    /* Write your code here */
+    if (nodePtr)
+    {
+        ItemType item = nodePtr->getItem();
+        visit(item, level);
+        _printTree(visit, nodePtr->getRightPtr(), level + 1);
+        _printTree(visit, nodePtr->getLeftPtr(), level + 1);
+    }
 }
 
 #endif
