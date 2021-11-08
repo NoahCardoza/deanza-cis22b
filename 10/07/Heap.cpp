@@ -45,8 +45,8 @@ void Heap::_reHeapDown(int index)
 	int left = _findLeftChild(index);
 
 	int direction =
-		left == -1
-			? right
+		right == -1
+			? left
 			: heapAry[left] < heapAry[right]
 				? left
 				: right;
