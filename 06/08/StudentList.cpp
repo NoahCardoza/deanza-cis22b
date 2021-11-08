@@ -1,8 +1,8 @@
 // Implementation file for the Student List class
-// Modified by:
-// IDE:
+// Modified by : Noah Cardoza
+// IDE : VS Code
 
-#include <iostream>         // For cout  and NULL
+#include <iostream> // For cout  and NULL
 #include <string>
 #include "StudentList.h"
 using namespace std;
@@ -30,19 +30,19 @@ StudentList::StudentList()
 
 void StudentList::displayList() const
 {
-    ListNode *pCur;  // To move through the list
-    
+    ListNode *pCur; // To move through the list
+
     // Position pCur: skip the head of the list.
-    pCur = head->next;
-    
+    pCur = head->getNext();
+
     // While pCur points to a node, traverse the list.
     while (pCur)
     {
         // Display the value in this node.
-        cout << pCur->stu.getGpa() << " " << pCur->stu.getName() << endl;
-        
+        cout << pCur->getData().getGpa() << " " << pCur->getData().getName() << endl;
+
         // Move to the next node.
-        pCur = pCur->next;
+        pCur = pCur->getNext();
     }
     cout << endl;
 }
@@ -53,29 +53,28 @@ void StudentList::displayList() const
 //**************************************************
 void StudentList::insertNode(Student dataIn)
 {
-    ListNode *newNode;  // A new node
-    ListNode *pCur;     // To traverse the list
-    ListNode *pPre;     // The previous node
-    
+    ListNode *newNode; // A new node
+    ListNode *pCur;    // To traverse the list
+    ListNode *pPre;    // The previous node
+
     // Allocate a new node and store num there.
-    newNode = new ListNode;
-    newNode->stu = dataIn;
-   
+    newNode = new ListNode(dataIn);
+
     // Initialize pointers
     pPre = head;
-    pCur = head->next;
-   
+    pCur = head->getNext();
+
     // Find location: skip all nodes whose name is less than dataIn's name
-    while (pCur != NULL && pCur->stu.getName()< dataIn.getName())
+    while (pCur != NULL && pCur->getData().getName() < dataIn.getName())
     {
         pPre = pCur;
-        pCur = pCur->next;
+        pCur = pCur->getNext();
     }
-    
+
     // Insert the new node between pPre and pCur
-    pPre->next = newNode;
-    newNode->next = pCur;
-    
+    pPre->setNext(newNode);
+    newNode->setNext(pCur);
+
     // Update the counter
     count++;
 }
@@ -87,30 +86,29 @@ void StudentList::insertNode(Student dataIn)
 //**************************************************
 bool StudentList::deleteNode(string target)
 {
-    ListNode *pCur;       // To traverse the list
-    ListNode *pPre;        // To point to the previous node
+    ListNode *pCur; // To traverse the list
+    ListNode *pPre; // To point to the previous node
     bool deleted = false;
-    
+
     // Initialize pointers
     pPre = head;
-    pCur = head->next;
+    pCur = head->getNext();
     // Find node containing the target: Skip all nodes whose name is less than the target
-    while (pCur != NULL && pCur->stu.getName() < target)
+    while (pCur != NULL && pCur->getData().getName() < target)
     {
         pPre = pCur;
-        pCur = pCur->next;
+        pCur = pCur->getNext();
     }
-    
+
     // If found, delete the node
-    if (pCur != NULL && pCur->stu.getName() == target)
+    if (pCur != NULL && pCur->getData().getName() == target)
     {
-        pPre->next = pCur->next;
+        pPre->setNext(pCur->getNext());
         delete pCur;
         deleted = true;
         count--;
     }
     return deleted;
-    
 }
 
 //**************************************************
@@ -119,22 +117,21 @@ bool StudentList::deleteNode(string target)
 //**************************************************
 StudentList::~StudentList()
 {
-    ListNode *pCur;   // To traverse the list
-    ListNode *pNext;  // To point to the next node
-    
+    ListNode *pCur;  // To traverse the list
+    ListNode *pNext; // To point to the next node
+
     // Position nodePtr at the head of the list.
-    pCur = head->next;
+    pCur = head->getNext();
     // While pCur is not at the end of the list...
     while (pCur != NULL)
     {
         // Save a pointer to the next node.
-        pNext = pCur->next;
+        pNext = pCur->getNext();
         // Delete the current node
         delete pCur;
-        
+
         // Position pCur at the next node.
         pCur = pNext;
     }
     delete head; // delete the sentinel node
 }
-

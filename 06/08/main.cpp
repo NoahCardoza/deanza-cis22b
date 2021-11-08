@@ -4,8 +4,8 @@
  This program builds and displays a sorted list
  The list is sorted in ascending order by name
  
- Modified by:
- IDE:
+ Modified by: Noah Cardoza
+ IDE: VS Code
  
  */
 #include <iostream>
@@ -20,9 +20,9 @@ int main()
 {
     // Define a StudentList object
     StudentList list;
-    
+
     buildList(list); // insert data into the list
-    
+
     list.displayList();
     string answer;
     cout << "Test Delete [Y/N]?\n";
@@ -41,10 +41,10 @@ void buildList(StudentList &list)
 {
     // Define and initialize an array of Student objects
     Student s[10] =
-    {{2.3, "Tom"}, {2.5, "John"}, {3.1, "Paul"}, {3.9, "Linda"}, {3.6, "Bob"}, {2.7, "Ann"}, {4.0, "Mary"}, {3.2, "Andy"}, {0, "#"}};
-    
+        {{2.3, "Tom"}, {2.5, "John"}, {3.1, "Paul"}, {3.9, "Linda"}, {3.6, "Bob"}, {2.7, "Ann"}, {4.0, "Mary"}, {3.2, "Andy"}, {0, "#"}};
+
     //Insert data from array into the linked list
-    for (int i = 0; s[i].getName() != "#" ; i++)
+    for (int i = 0; s[i].getName() != "#"; i++)
     {
         list.insertNode(s[i]);
     }
@@ -54,11 +54,11 @@ void buildList(StudentList &list)
 void deleteTestDriver(StudentList &list)
 {
     string toDelete[] = {"Tom", "Andy", "Susan", "Alex", "Zoltan", "Mary", "#"};
-    
+
     for (int i = 0; toDelete[i] != "#"; i++)
     {
         cout << "   " << toDelete[i];
-        if (/* Write your code here */ ) // call the deleteNode member function 
+        if (list.deleteNode(toDelete[i])) // call the deleteNode member function
             cout << " - deleted\n";
         else
             cout << " - not found\n";
