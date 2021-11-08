@@ -1,9 +1,9 @@
 // Sorted Circular Doubly-Linked List with Sentinel Node
 // Implementation file for the Student List class
-// Modified by:
-// IDE:
+// Modified by: Noah Cardoza
+// IDE: VS Code
 
-#include <iostream>         // For cout  and NULL
+#include <iostream> // For cout  and NULL
 #include "StudentList.h"
 using namespace std;
 
@@ -18,11 +18,11 @@ using namespace std;
 StudentList::StudentList()
 {
     head = new ListNode; // head points to the sentinel node
-    
+
     head->stu.gpa = -1;
     head->stu.name = "";
     head->forw = head;
-    /* Write your code here */
+    head->back = head;
     count = 0;
 }
 
@@ -34,7 +34,7 @@ StudentList::StudentList()
 
 void StudentList::displayListForw() const
 {
-    ListNode *pCur;  // To move through the list
+    ListNode *pCur; // To move through the list
 
     // Position pCur: skip the head of the list.
     pCur = head->forw;
@@ -58,7 +58,21 @@ void StudentList::displayListForw() const
 
 void StudentList::displayListBack() const
 {
-    /* Write your code here */
+    ListNode *pCur; // To move through the list
+
+    // Position pCur: skip the head of the list.
+    pCur = head->back;
+
+    // While pCur points to a node, traverse the list.
+    while (pCur != head)
+    {
+        // Display the value in this node.
+        cout << pCur->stu.gpa << " " << pCur->stu.name << endl;
+
+        // Move to the next node.
+        pCur = pCur->back;
+    }
+    cout << endl;
 }
 //**************************************************
 // The insertNode function inserts a node with
@@ -66,16 +80,17 @@ void StudentList::displayListBack() const
 //**************************************************
 void StudentList::insertNode(Student dataIn)
 {
-    ListNode *newNode;  // A new node
-    ListNode *pCur;     // To traverse the list
-    
+    ListNode *newNode; // A new node
+    ListNode *pCur;    // To traverse the list
+    ListNode *pPre;    // Store the previous node
+
     // Allocate a new node and store num there.
     newNode = new ListNode;
     newNode->stu = dataIn;
 
     // Initialize pointers
     pCur = head->forw;
-   
+
     // Find location: skip all nodes whose name is less than dataIn's name
     while (pCur != head && pCur->stu.name < dataIn.name)
     {
@@ -83,12 +98,13 @@ void StudentList::insertNode(Student dataIn)
     }
 
     // Insert the new node between pPre and pCur
-    ListNode *pPre = pCur->back;     // The previous node
+    pPre = pCur->back; // The previous node
     pPre->forw = newNode;
     newNode->forw = pCur;
-    
-     /* Write your code here */
-    
+
+    pCur->back = newNode;
+    newNode->back = pPre;
+
     // Update the counter
     count++;
 }
@@ -99,5 +115,4 @@ void StudentList::insertNode(Student dataIn)
 //**************************************************
 StudentList::~StudentList()
 {
-  
 }
