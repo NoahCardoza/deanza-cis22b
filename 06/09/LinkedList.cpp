@@ -120,8 +120,7 @@ void LinkedList::displayList() const
 //**************************************************
 bool LinkedList::searchList(string target, College &dataOut) const
 {
-    bool found = false; // assume target not found
-    Node *pCur;         // To move through the list
+    Node *pCur; // To move through the list
 
     pCur = head->next;
 
@@ -132,11 +131,11 @@ bool LinkedList::searchList(string target, College &dataOut) const
 
     if (pCur && target == pCur->college.getCode())
     {
-        found = true;
         dataOut = pCur->college;
+        return true;
     }
 
-    return found;
+    return false;
 }
 
 //**************************************************
