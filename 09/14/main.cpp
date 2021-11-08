@@ -12,15 +12,14 @@ int key_to_index(const Student &key, int size);
 
 int main()
 {
-
     Student list[] = {{"tom", 2.5}, {"bob", 3.2}, {"boc", 3.2}, {"mia", 3.9}, {"jack", 4.0}, {"john", 3.9}, {"zoe", 3.5}, {"ann", 3.1}, {"obb", 2.2}, {"bbo", 3.3}, {"ccm", 1.5}, {"", 0}};
 
-    /* Write your code here: declare hash, a HashTable object that stores Student objects in its nodes */
+    HashTable<Student> hash;
 
     // build hash from array
     for (int i = 0; list[i].getName() != ""; i++)
     {
-        /* Write your code here: insert list[i] into the hash table */
+        hash.insert(list[i], &key_to_index);
     }
 
     // test search
@@ -31,7 +30,7 @@ int main()
         Student item; // will store a copy of the item found in the hash table
         int nc;       // number of collisions if found, -1 if not found
 
-        nc = /* Write your code here: call search to search for target[i] */;
+        nc = hash.search(item, target[i], &key_to_index);
         if (nc != -1)
             cout << item.getName() << " " << item.getGpa() << " (" << nc << " collisions!)" << endl;
         else
@@ -48,21 +47,26 @@ int main()
     double gpa;    // gpa to insert
     cout << "Enter name or Q to quit: ";
     cin >> name;
+
+    Student search;
+    search.setName(name);
+
     while (name != "Q")
     {
         /* Write your code here: create key, a Student object, to hold the name to search for */
-        if (hash.search(found, key, key_to_index) != -1)
+        if (hash.search(found, search, &key_to_index) != -1)
             cout << endl
                  << "Duplicate key: " << found.getName() << " - rejected! " << endl;
         else
         {
             cout << "Enter gpa ";
             cin >> gpa;
-            /* Write your code here: create item, a Student object, to hold the name and gpa to be inserted into the hash table */
-            /* Write your code here: call insert to insert item into the hash table */
+            search.setGpa(gpa);
+            hash.insert(search, &key_to_index);
         }
         cout << "Enter name: ";
         cin >> name;
+        search.setName(name);
     }
     cout << "Load Factor: " << hash.getLoadFactor() << endl;
 
@@ -105,8 +109,8 @@ int main()
 }
 
 /*~*~*~*
- Hash function: takes the key and returns the index in the hash table
- *~**/
+    Hash function: takes the key and returns the index in the hash table
+    *~**/
 int key_to_index(const Student &key, int size)
 {
     string k = key.getName();

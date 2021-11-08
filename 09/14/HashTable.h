@@ -8,11 +8,11 @@
 
 #include "HashNode.h"
 
-template <class ItemType>
+template <class T>
 class HashTable
 {
 private:
-    HashNode<ItemType> *hashAry;
+    HashNode<T> *hashAry;
     int hashSize;
     int count;
 
@@ -21,13 +21,13 @@ public:
     {
         count = 0;
         hashSize = 53;
-        hashAry = new HashNode<ItemType>[hashSize];
+        hashAry = new HashNode<T>[hashSize];
     }
     HashTable(int n)
     {
         count = 0;
         hashSize = n;
-        hashAry = new HashNode<ItemType>[hashSize];
+        hashAry = new HashNode<T>[hashSize];
     }
     ~HashTable() { delete[] hashAry; }
 
@@ -37,24 +37,52 @@ public:
     bool isEmpty() const { return count == 0; }
     bool isFull() const { return count == hashSize; }
 
-    bool insert(const ItemType &itemIn, int h(const ItemType &key, int size));
-    bool remove(ItemType &itemOut, const ItemType &key, int h(const ItemType &key, int size));
-    int search(ItemType &itemOut, const ItemType &key, int h(const ItemType &key, int size));
+    bool insert(const T &itemIn, int h(const T &key, int size));
+    bool remove(T &itemOut, const T &key, int h(const T &key, int size));
+    int search(T &itemOut, const T &key, int h(const T &key, int size));
 };
 
 /*~*~*~*
    Insert an item into the hash table
    It does not reject duplicates
 *~**/
-template <class ItemType>
-bool HashTable<ItemType>::insert(const ItemType &itemIn, int h(const ItemType &key, int size))
+template <class T>
+bool HashTable<T>::insert(const T &value, int h(const T &key, int size))
 {
+    HashNode<T> *bucket;
+    int index, stop, noCol;
+
+    // initalize to 0
+    noCol = 0;
+
     if (count == hashSize)
         return false;
 
-    /* Write your code here */
+    // stop when we loop back to the same index we started on
+    index = stop = h(value, hashSize);
 
-    return true;
+    do
+    {
+        bucket = hashAry + index % hashSize;
+        if (!bucket->isOccupied())
+        {
+            bucket->setItem(value);
+            bucket->setTouched(true);
+            bucket->setOccupied(1);
+            bucket->setNoCollisions(noCol);
+            count++;
+            return true;
+        }
+
+        // reject duplicates
+        if (bucket->getItem() == value)
+        {
+            return false;
+        }
+        noCol++;
+    } while (stop != ++index % hashSize);
+
+    return false;
 }
 
 /*~*~*~*
@@ -62,10 +90,42 @@ bool HashTable<ItemType>::insert(const ItemType &itemIn, int h(const ItemType &k
      - copies data in the hash node to itemOut
      - replaces data in the hash node with an empty record
 *~**/
-template <class ItemType>
-bool HashTable<ItemType>::remove(ItemType &itemOut, const ItemType &key, int h(const ItemType &key, int size))
+template <class T>
+bool HashTable<T>::remove(T &itemOut, const T &key, int h(const T &key, int size))
 {
-    /* Write your code here */
+    HashNode<T> *bucket;
+    int index, stop;
+
+    if (count == 0)
+        return false;
+
+    // stop when we loop back to the same index we started on
+    index = stop = h(key, hashSize);
+
+    do
+    {
+        bucket = hashAry + index % hashSize;
+        if (bucket->isUntouched())
+        {
+            // if this bucket has never bet set/unset there is
+            // no way the value we are looking for could be past
+            // this point
+            return false;
+        }
+
+        // remove matching key from hashmap
+        if (bucket->getItem() == key)
+        {
+            T empty;
+            itemOut = bucket->getItem();
+            bucket->setItem(empty);
+            bucket->setOccupied(0);
+            bucket->setNoCollisions(-1);
+            count--;
+            return true;
+        }
+
+    } while (stop != ++index % hashSize);
 
     return false;
 }
@@ -77,11 +137,39 @@ bool HashTable<ItemType>::remove(ItemType &itemOut, const ItemType &key, int h(c
       - returns the number of collisions for this key
    if not found, returns -1
 *~**/
-template <class ItemType>
-int HashTable<ItemType>::search(ItemType &itemOut, const ItemType &key, int h(const ItemType &key, int size))
+template <class T>
+int HashTable<T>::search(T &itemOut, const T &key, int h(const T &key, int size))
 {
+    HashNode<T> *bucket;
+    T item;
+    int index, stop;
 
-    /* Write your code here */
+    if (count == 0)
+        return false;
+
+    // stop when we loop back to the same key we started on
+    index = stop = h(key, hashSize);
+
+    do
+    {
+        bucket = hashAry + index % hashSize;
+        item = bucket->getItem();
+
+        if (bucket->isUntouched())
+        {
+            // since we haven't implemented a delete method
+            // if a bucket isn't occupied then we
+            // know it won't be anywhere after
+            return -1;
+        }
+
+        if (item == key)
+        {
+            itemOut = item;
+            return bucket->getNoCollisions();
+        }
+
+    } while (stop != ++index % hashSize);
 
     return -1;
 }

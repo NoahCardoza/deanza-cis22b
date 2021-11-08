@@ -6,41 +6,47 @@
 #ifndef _HASH_NODE
 #define _HASH_NODE
 
-// convert to template
-
+template <class T>
 class HashNode
 {
 private:
-    Student item;
+    T item;
     int occupied;
     int noCollisions;
+    bool touched;
 
 public:
     // constructors
     HashNode()
     {
+        touched = false;
         occupied = 0;
         noCollisions = 0;
     }
-    HashNode(Student anItem)
+    HashNode(T item)
     {
-        item = anItem;
+        touched = true;
+        this->item = item;
         occupied = 1;
         noCollisions = 0;
     }
-    HashNode(Student anItem, int ocp, int nCol)
+    HashNode(T item, int ocp, int nCol)
     {
-        item = anItem;
+        touched = true;
+        this->item = item;
         occupied = ocp;
         noCollisions = nCol;
     }
     // setters
-    void setItem(const Student &anItem) { item = anItem; }
+    void setItem(const T &item) { this->item = item; }
+    void setTouched(bool value) { touched = value; }
     void setOccupied(int ocp) { occupied = ocp; }
     void setNoCollisions(int nCol) { noCollisions = nCol; }
 
     // getters
-    Student getItem() const { return item; }
+    T getItem() const { return item; }
+    bool isOccupied() const { return occupied == 1; }
+    bool isUntouched() const { return touched == false; }
     int getOccupied() const { return occupied; }
     int getNoCollisions() const { return noCollisions; }
 };

@@ -32,6 +32,10 @@ public:
     double getGpa() const { return gpa; }
 
     // Overloaded operators
-    /* Write your code here */
+
+    bool operator==(const Student &c) const
+    {
+        return name == c.name;
+    }
 };
 #endif
