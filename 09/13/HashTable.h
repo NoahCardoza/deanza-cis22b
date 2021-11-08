@@ -1,6 +1,6 @@
 // Specification file for the Hash class
 // Written By: A. Student
-// Changed by:
+// Changed by: Noah Carodza
 
 #ifndef HASHTABLE_H_
 #define HASHTABLE_H_
