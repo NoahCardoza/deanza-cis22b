@@ -25,10 +25,8 @@ int main()
     cin >> num;
     while (num != 0)
     {
-        /* Write your code here:
-           call insertHeap to insert num into the min-heap */
-        /* Write your code here:
-           call insertHeap to insert num into the max-heap */
+        minHeap.insertHeap(num, compareMin);
+        maxHeap.insertHeap(num, compareMax);
         cin >> num;
     }
 
