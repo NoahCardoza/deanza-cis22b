@@ -63,7 +63,12 @@ template <class ItemType>
 bool BinarySearchTree<ItemType>::search(const ItemType &anEntry, ItemType &returnedItem) const
 {
     BinaryNode<ItemType> *temp = nullptr;
-    /* Write your code here */
+    temp = _search(this->rootPtr, anEntry);
+    if (temp)
+    {
+        returnedItem = temp->getItem();
+        return true;
+    }
     return false;
 }
 
@@ -107,11 +112,22 @@ template <class ItemType>
 BinaryNode<ItemType> *BinarySearchTree<ItemType>::_search(BinaryNode<ItemType> *nodePtr,
                                                           const ItemType &target) const
 {
-    BinaryNode<ItemType> *found = nullptr;
+    if (!nodePtr)
+    {
+        return nullptr;
+    }
 
-    /* Write your code here */
+    if (target < nodePtr->getItem())
+    {
+        return _search(nodePtr->getLeftPtr(), target);
+    }
 
-    return found;
+    if (target > nodePtr->getItem())
+    {
+        return _search(nodePtr->getRightPtr(), target);
+    }
+
+    return nodePtr;
 }
 
 #endif
