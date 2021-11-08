@@ -43,6 +43,7 @@ public:
 
     // getters
     Student getItem() const { return item; }
+    bool isOccupied() const { return occupied == 1; }
     int getOccupied() const { return occupied; }
     int getNoCollisions() const { return noCollisions; }
 };

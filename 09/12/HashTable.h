@@ -38,6 +38,7 @@ public:
     bool isEmpty() const { return count == 0; }
     bool isFull() const { return count == hashSize; }
 
+    void _set(HashNode *, Student *);
     bool insert(Student &itemIn);
     bool remove(Student &itemOut);
     bool search(Student &target, int &noCol, string key);
