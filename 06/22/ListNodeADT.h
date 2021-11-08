@@ -21,7 +21,22 @@ public:
 
     // setters
 
+    // set the forw pointer
+    void setNext(ListNode *nextPtr) { forw = nextPtr; }
+
+    // set the back pointer
+    void setPrev(ListNode *prevPtr) { back = prevPtr; }
+
     // getters
+
+    // return pointer in the next node
+    ListNode<T> *getNext() const { return forw; }
+
+    // return pointer in the previous node
+    ListNode<T> *getPrev() const { return back; }
+
+    // return data object in the listnode: getData()
+    T getData() const { return data; }
 };
 
 #endif

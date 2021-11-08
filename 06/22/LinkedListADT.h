@@ -90,9 +90,30 @@ void LinkedList<T>::insertNode(const T &dataIn)
 template <class T>
 bool LinkedList<T>::deleteNode(const T &target)
 {
-    /* Write your code here */
+    ListNode<T> *pCur; // To traverse the list
 
-    return deleted;
+    // Initialize pointers
+    pCur = head->getNext();
+
+    // Find node containing the target: Skip all nodes whose gpa is less than the target
+    while (pCur != head && pCur->getData() < target)
+    {
+        pCur = pCur->getNext();
+    }
+
+    // If found, delete the node
+    if (pCur->getData() == target)
+    {
+        pCur->getPrev()->setNext(pCur->getNext());
+        pCur->getNext()->setPrev(pCur->getPrev());
+
+        delete pCur;
+        length--;
+
+        return true;
+    }
+
+    return false;
 }
 
 //**************************************************
@@ -114,7 +135,7 @@ void LinkedList<T>::displayListForw() const
         // Display the value in this node.
         // pCur->getData().hDdisplay();
 
-        std::cout << pCur->getData();
+        std::cout << pCur->getData() << std::endl;
 
         // Move to the next node.
         pCur = pCur->getNext();
@@ -130,8 +151,22 @@ void LinkedList<T>::displayListForw() const
 template <class T>
 void LinkedList<T>::displayListBack() const
 {
-    /* Write your code here */
+    ListNode<T> *pCur; // To move through the list
 
+    // Position pCur: skip the head of the list.
+    pCur = head->getPrev();
+
+    // While pCur points to a node, traverse the list.
+    while (pCur != head)
+    {
+        // Display the value in this node.
+        // pCur->getData().hDdisplay();
+
+        std::cout << pCur->getData() << std::endl;
+
+        // Move to the next node.
+        pCur = pCur->getPrev();
+    }
     std::cout << std::endl;
 }
 
@@ -143,9 +178,22 @@ void LinkedList<T>::displayListBack() const
 template <class T>
 bool LinkedList<T>::searchList(const T &target, T &dataOut) const
 {
-    /* Write your code here */
+    ListNode<T> *pCur; // To move through the list
 
-    return found;
+    pCur = head->getNext();
+
+    while (pCur != head && target > pCur->getData())
+    {
+        pCur = pCur->getNext();
+    }
+
+    if (pCur && target == pCur->getData())
+    {
+        dataOut = pCur->getData();
+        return true;
+    }
+
+    return false;
 }
 
 //**************************************************
