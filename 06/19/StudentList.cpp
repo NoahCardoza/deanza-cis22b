@@ -22,7 +22,7 @@ StudentList::StudentList()
     head->stu.gpa = -1;
     head->stu.name = "";
     head->forw = head;
-    /* Write your code here */
+    head->back = head;
     count = 0;
 }
 
@@ -58,8 +58,23 @@ void StudentList::displayListForw() const
 
 void StudentList::displayListBack() const
 {
-    /* Write your code here */
+    ListNode *pCur; // To move through the list
+
+    // Position pCur: skip the head of the list.
+    pCur = head->back;
+
+    // While pCur points to a node, traverse the list.
+    while (pCur != head)
+    {
+        // Display the value in this node.
+        cout << pCur->stu.gpa << " " << pCur->stu.name << endl;
+
+        // Move to the next node.
+        pCur = pCur->back;
+    }
+    cout << endl;
 }
+
 //**************************************************
 // The insertNode function inserts a node with
 // stu copied to its value member.
@@ -68,6 +83,7 @@ void StudentList::insertNode(Student dataIn)
 {
     ListNode *newNode; // A new node
     ListNode *pCur;    // To traverse the list
+    ListNode *pPre;    // Store the previous node
 
     // Allocate a new node and store num there.
     newNode = new ListNode;
@@ -83,11 +99,12 @@ void StudentList::insertNode(Student dataIn)
     }
 
     // Insert the new node between pPre and pCur
-    ListNode *pPre = pCur->back; // The previous node
+    pPre = pCur->back; // The previous node
     pPre->forw = newNode;
     newNode->forw = pCur;
 
-    /* Write your code here */
+    pCur->back = newNode;
+    newNode->back = pPre;
 
     // Update the counter
     count++;
@@ -102,7 +119,20 @@ bool StudentList::deleteNode(string target)
     ListNode *pCur; // To traverse the list
     bool success = false;
 
-    /* Write your code here */
+    pCur = head->forw;
+
+    while (pCur != head && pCur->stu.name < target)
+    {
+        pCur = pCur->forw;
+    }
+
+    if (pCur && pCur->stu.name == target)
+    {
+        success = true;
+        pCur->back->forw = pCur->forw;
+        pCur->forw->back = pCur->back;
+        delete pCur;
+    }
 
     return success;
 }

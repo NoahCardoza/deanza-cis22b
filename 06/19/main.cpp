@@ -35,7 +35,7 @@ int main()
     }
     cout << endl;
     list.displayListForw();
-    /* Write your code here: display the list from Z to A */
+    list.displayListBack();
     return 0;
 }
 
