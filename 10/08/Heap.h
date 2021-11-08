@@ -1,8 +1,8 @@
 /* *~*~*
 Specification file for the Heap class: min-heap of integers
 Written By: A. Student
-Changed by:
-IDE:  
+Changed by: Noah Cardoza
+IDE: VS Code
 *~**/
 
 #ifndef HEAP_H_
@@ -20,7 +20,7 @@ private:
 	int _findParent(int index) { return (index <= 0) ? (-1) : (index - 1) / 2; }
 	int _findLeftChild(int index) { return (2 * index + 1 >= count) ? (-1) : (2 * index + 1); }
 	int _findRightChild(int index) { return (2 * index + 2 >= count) ? (-1) : (2 * index + 2); }
-	/* Write your code here */
+	void _printIndented(int index, void visit(int, int));
 
 public:
 	Heap()
@@ -45,7 +45,7 @@ public:
 	bool deleteHeap(int &itemOut);
 
 	// other functions added
-	/* Write your code here */
+	void printIndented(void visit(int, int));
 };
 
 #endif
