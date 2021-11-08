@@ -1,6 +1,6 @@
 // Binary tree abstract base class
 // Created by A. Student
-// Modified by:
+// Modified by: Noah Cardoza
 
 #ifndef _BINARY_TREE
 #define _BINARY_TREE

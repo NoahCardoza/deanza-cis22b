@@ -1,10 +1,11 @@
 // Binary Search Tree ADT
 // Created by A. Student
-// Modified by: ???
+// Modified by: Noah Cardoza
 
 #ifndef _BINARY_SEARCH_TREE
 #define _BINARY_SEARCH_TREE
 
+#include <iostream>
 #include "BinaryTree.h"
 
 template <class ItemType>
@@ -30,10 +31,10 @@ private:
     //BinaryNode<ItemType>* _search(BinaryNode<ItemType>* treePtr, const ItemType &target) const;
 
     // find the smallest node
-    BinaryNode<ItemType> *_findSmallest(BinaryNode<ItemType> *nodePtr, ItemType &smallest) const;
+    BinaryNode<ItemType> *_findSmallest(BinaryNode<ItemType> *nodePtr) const;
 
     // find the biggest node
-    BinaryNode<ItemType> *_findLargest(BinaryNode<ItemType> *nodePtr, ItemType &smallest) const;
+    BinaryNode<ItemType> *_findLargest(BinaryNode<ItemType> *nodePtr) const;
 
     // internal remove node: locate and delete target node under nodePtr subtree
     // BinaryNode<ItemType>* _remove(BinaryNode<ItemType>* nodePtr, const ItemType target, bool &success);
@@ -59,10 +60,17 @@ bool BinarySearchTree<ItemType>::insert(const ItemType &newEntry)
 template <class ItemType>
 bool BinarySearchTree<ItemType>::findSmallest(ItemType &returnedItem) const
 {
-    BinaryNode<ItemType> *temp = nullptr;
-    temp = _findSmallest(this->rootPtr, returnedItem);
-    if (temp) // != NULL
-        return true;
+    BinaryNode<ItemType> *smallestNode = nullptr;
+    if (this->rootPtr)
+    {
+        smallestNode = _findSmallest(this->rootPtr);
+        if (smallestNode)
+        {
+            returnedItem = smallestNode->getItem();
+            return true;
+        }
+    }
+
     return false;
 }
 
@@ -70,10 +78,21 @@ bool BinarySearchTree<ItemType>::findSmallest(ItemType &returnedItem) const
 template <class ItemType>
 bool BinarySearchTree<ItemType>::findLargest(ItemType &returnedItem) const
 {
-    BinaryNode<ItemType> *temp = nullptr;
-    temp = _findLargest(this->rootPtr, returnedItem);
-    if (temp) // != NULL
+    BinaryNode<ItemType> *largestNode = nullptr;
+
+    if (!this->rootPtr)
+    {
+        return false;
+    }
+
+    largestNode = _findLargest(this->rootPtr);
+
+    if (largestNode)
+    {
+        returnedItem = largestNode->getItem();
         return true;
+    }
+
     return false;
 }
 
@@ -112,16 +131,26 @@ BinaryNode<ItemType> *BinarySearchTree<ItemType>::_insert(BinaryNode<ItemType> *
 
 //Implementation to find the smallest: recursive
 template <class ItemType>
-BinaryNode<ItemType> *BinarySearchTree<ItemType>::_findSmallest(BinaryNode<ItemType> *nodePtr, ItemType &smallest) const
+BinaryNode<ItemType> *BinarySearchTree<ItemType>::_findSmallest(BinaryNode<ItemType> *nodePtr) const
 {
-    /* Write your code here */
+    BinaryNode<ItemType> *next = nodePtr->getLeftPtr();
+    if (next)
+    {
+        return _findSmallest(next);
+    }
+    return nodePtr;
 }
 
 //Implementation to find the largest: recursive
 template <class ItemType>
-BinaryNode<ItemType> *BinarySearchTree<ItemType>::_findLargest(BinaryNode<ItemType> *nodePtr, ItemType &biggest) const
+BinaryNode<ItemType> *BinarySearchTree<ItemType>::_findLargest(BinaryNode<ItemType> *nodePtr) const
 {
-    /* Write your code here */
+    BinaryNode<ItemType> *next = nodePtr->getRightPtr();
+    if (next)
+    {
+        return _findLargest(next);
+    }
+    return nodePtr;
 }
 
 #endif
